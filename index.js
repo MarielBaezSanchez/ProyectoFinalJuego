@@ -13,7 +13,6 @@ var palabra_array = new Array();
 var aciertos = 0;
 var errores = 0;
 
-//palabras para juego
 
 palabras_array.push("LEÓN");
 palabras_array.push("CABALLO");
@@ -204,6 +203,24 @@ function horca(errores){
         }
     }
 }
+
+function gameOver(errores){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "black";
+
+    ctx.font = "bold 50px Courier";
+    if (errores < 5){
+        ctx.fillText("¡Genial! La palabra es: ", 110, 280);
+    } else {
+        ctx.fillText("¡Que mal, has fallado! La palabra era: ", 110, 280);
+    }
+    
+    ctx.font = "bold 80px Courier";
+    lon = (canvas.width - (palabra.length*48))/2;
+    ctx.fillText(palabra, lon, 380);
+    horca(errores);
+}
+
 
 window.onload = function() {
     canvas = document.getElementById("screen");
