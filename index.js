@@ -58,7 +58,7 @@ palabras_array.push("BUDAPEST");
 palabras_array.push("LIBÉLULA");
 palabras_array.push("LUCIÉRNAGA");
 palabras_array.push("BÉLGICA");
-palabras_array.push("QUÍMICAñ");
+palabras_array.push("QUÍMICA");
 
 function Tecla(x, y, ancho, alto, letra){
     this.x = x;
