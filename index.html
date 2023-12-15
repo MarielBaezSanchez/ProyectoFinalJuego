@@ -1,24 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juego del Ahorcado</title>
+    <meta charset="utf-8">
+    <title>Juego del ahorcado</title>
     <style>
-        body {
+      body {
+            font-family: 'Gabriola', sans-serif;
             width: 960px;
             margin: 0 auto;
+            background-color: bisque;
+            color: #EDEDED;
+            overflow: hidden;
         }
-
         h1 {
             text-align: center;
+            font-weight: bold;
+            font-size: 35px;
+            color: #00a8e8;
+            text-shadow: 0 0 10px limegreen, 0 0 20px limegreen, 0 0 30px limegreen;
+        }
+        #pantalla {
+            border: groove 8px gold;
+            background: lightgreen;
+        }
+        #boton {
+            background-color: blue;
+            color: white;
+            font-size: 20px;
+            text-align: center;
+            font-weight: bolder;
+            padding: 3px;
+            border: solid 2px black;
+        }
+        #boton:hover {
+            background-color: #0078a0;
+            font-size: 22px;
+            border: groove 4px #0078a0;
+        }
+        #pantalla div {
+            display: inline-block;
+            margin: 5px;
+            padding: 10px;
+            border: solid 2px blue;
+            cursor: pointer;
+        }
+        #pantalla div:hover {
+            background-color: lightblue; 
+            border: solid 2px green; 
         }
     </style>
 </head>
 <body>
-    <h1>Juego del Ahorcado</h1>
-    <canvas id="screen" width="960px" height="450px">Chale, tu navegador no funciona bien</canvas>
-    <button id="boton" type="reset" onclick="javascript:window.location.reload();">Intentar jugar otra vez</button>
+    <h1>Juego del ahorcado</h1>
+    <canvas id="pantalla" width="960px" height="450px">
+        Tu navegador no soporta Canvas.
+    </canvas>
+    <button id="boton" type="reset" onclick="javascript:window.location.reload();">Volver a Jugar</button>
     <script src="./index.js"></script>
 </body>
 </html>

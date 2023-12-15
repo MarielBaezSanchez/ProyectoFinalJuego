@@ -2,34 +2,63 @@ var ctx;
 var canvas;
 var palabra;
 var letras = "QWERTYUIOPASDFGHJKLÑZXCVBNM";
-var colorTeclas = "black"
-var colorMargen = "lightgray";
+var colorTecla = "#585858";
+var colorMargen = "red";
 var inicioX = 200;
 var inicioY = 300;
 var lon = 35;
 var margen = 20;
+var pistaText = "";
+
 var teclas_array = new Array();
-var palabra_array = new Array();
+var letras_array = new Array();
+var palabras_array = new Array();
+
 var aciertos = 0;
 var errores = 0;
 
-
-palabras_array.push("LEÓN");
+palabras_array.push("LEON");
 palabras_array.push("CABALLO");
 palabras_array.push("PERRO");
 palabras_array.push("GATO");
 palabras_array.push("LAGARTIJA");
 palabras_array.push("RINOCERONTE");
-palabras_array.push("TIBURÓN");
+palabras_array.push("TIBURON");
 palabras_array.push("CARACOL");
-palabras_array.push("ALACRÁN");
+palabras_array.push("ALACRAN");
 palabras_array.push("ARAÑA");
 palabras_array.push("CHAPULIN");
 palabras_array.push("AVESTRUZ");
 palabras_array.push("OCELOTE");
-palabras_array.push("CANGURO");
-palabras_array.push("ÁGUILA");
-palabras_array.push("MUERCIÉLAGO");
+palabras_array.push("MUSARAÑA");
+palabras_array.push("AGUILA");
+palabras_array.push("MURCIÉLAGO");
+palabras_array.push("CANGREJO");
+palabras_array.push("GALLINA");
+palabras_array.push("GAVILAN");
+palabras_array.push("TLACUACHE");
+palabras_array.push("CACOMIXTLE");
+palabras_array.push("ORUGA");
+palabras_array.push("ELEFANTE");
+palabras_array.push("GIRASOL");
+palabras_array.push("AUSTRALIA");
+palabras_array.push("JIRAFA");
+palabras_array.push("CANADÁ");
+palabras_array.push("TIGRE");
+palabras_array.push("ESPAÑA");
+palabras_array.push("MONACO");
+palabras_array.push("CHINA");
+palabras_array.push("KIWI");
+palabras_array.push("NORUEGA");
+palabras_array.push("KOALA");
+palabras_array.push("PINGÜINO");
+palabras_array.push("PANDA");
+palabras_array.push("HOCKEY");
+palabras_array.push("BUDAPEST");
+palabras_array.push("LIBÉLULA");
+palabras_array.push("LUCIÉRNAGA");
+palabras_array.push("BÉLGICA");
+palabras_array.push("QUÍMICAñ");
 
 function Tecla(x, y, ancho, alto, letra){
     this.x = x;
@@ -77,33 +106,34 @@ function dibujaCajaLetra(){
 }
 
 function pistaFunction(palabra){
-    let pista = "";
-    switch(palabra){
-        case 'LEON':
-            pista = "Ruge y es fuerte.";
-            break; 
+    let pista = ""; 
+    switch(palabra){ 
+        case 'LEON': 
+            pista = "Ruge y es fuerte. ";
+            break;   
         case 'CABALLO':
             pista = "Hay de tierra y hay de mar.";
             break;
         case 'PERRO':
-            pista = "El mejor amigo del hombre.";
+            pista = "El mejor amigo del hombre. ";
             break;
         case 'GATO':
-            pista = "Son tiernos pero arañan.";
+            pista = "Son tiernos pero arañan. ";
             break;
-        case 'MUERCIÉLAGO':
-            pista = "Se pasan el día refugiados y al caer la tarde salen.";
-        default:
-            pista="No hay pista aun 😶";
+            case 'MUERCIÉLAGO':
+                pista = "Por el día se resguardan y por la noche salen.";
+                break;
+        default:  
+            pista="Todavía no hay pistas.";
     }
-    
-    ctx.fillStyle = "black";
-    ctx.font = "bold 20px Courier";
-    ctx.fillText(pista, 10, 15);
+
+    ctx.fillStyle = "black";  
+    ctx.font = "bold 20px Courier";  
+    ctx.fillText(pista, 10, 15); 
 }
 
         
-
+ 
 function teclado(){
     var ren = 0;
     var col = 0;
@@ -159,48 +189,49 @@ function horca(errores){
     imagen.onload = function(){
         ctx.drawImage(imagen, 390, 0, 230, 230);
     }
-    
-    function ajusta(xx, yy){
-        var posCanvas = canvas.getBoundingClientRect();
-        var x = xx-posCanvas.left;
-        var y = yy-posCanvas.top;
-        return{x:x, y:y}
+}
+
+function ajusta(xx, yy){
+    var posCanvas = canvas.getBoundingClientRect();
+    var x = xx-posCanvas.left;
+    var y = yy-posCanvas.top;
+    return{x:x, y:y}
+}
+
+function selecciona(e){
+    var pos = ajusta(e.clientX, e.clientY);
+    var x = pos.x;
+    var y = pos.y;
+    var tecla;
+    var bandera = false;
+    for (var i = 0; i < teclas_array.length; i++){
+        tecla = teclas_array[i];
+        if (tecla.x > 0){
+            if ((x > tecla.x) && (x < tecla.x + tecla.ancho) && (y > tecla.y) && (y < tecla.y + tecla.alto)){
+                break;
+            }
+        }
     }
-    
-    function selecciona(e){
-        var pos = ajusta(e.clientX, e.clientY);
-        var x = pos.x;
-        var y = pos.y;
-        var tecla;
-        var bandera = false;
-        for (var i = 0; i < teclas_array.length; i++){
-            tecla = teclas_array[i];
-            if (tecla.x > 0){
-                if ((x > tecla.x) && (x < tecla.x + tecla.ancho) && (y > tecla.y) && (y < tecla.y + tecla.alto)){
-                    break;
-                }
+    if (i < teclas_array.length){
+        for (var i = 0 ; i < palabra.length ; i++){ 
+            letra = palabra.substr(i, 1);
+            if (letra == tecla.letra){ 
+                caja = letras_array[i];
+                caja.dibujaLetra();
+                aciertos++;
+                bandera = true;
             }
         }
-        if (i < teclas_array.length){
-            for (var i = 0 ; i < palabra.length ; i++){ 
-                letra = palabra.substr(i, 1);
-                if (letra == tecla.letra){
-                    caja = letras_array[i];
-                    caja.dibujaLetra();
-                    aciertos++;
-                    bandera = true;
-                }
-            }
-            if (bandera == false){
-                errores++;
-                horca(errores);
-                if (errores == 5) gameOver(errores);
-            }
-            
-            ctx.clearRect(tecla.x - 1, tecla.y - 1, tecla.ancho + 2, tecla.alto + 2);
-            tecla.x - 1;
-            if (aciertos == palabra.length) gameOver(errores);
+        if (bandera == false){ 
+            errores++;
+            horca(errores);
+            if (errores == 5) gameOver(errores);
         }
+        
+        ctx.clearRect(tecla.x - 1, tecla.y - 1, tecla.ancho + 2, tecla.alto + 2);
+        tecla.x - 1;
+        
+        if (aciertos == palabra.length) gameOver(errores);
     }
 }
 
@@ -221,9 +252,8 @@ function gameOver(errores){
     horca(errores);
 }
 
-
-window.onload = function() {
-    canvas = document.getElementById("screen");
+window.onload = function(){
+    canvas = document.getElementById("pantalla");
     if (canvas && canvas.getContext){
         ctx = canvas.getContext("2d");
         if(ctx){
@@ -232,7 +262,7 @@ window.onload = function() {
             horca(errores);
             canvas.addEventListener("click", selecciona, false);
         } else {
-            alert ("Error al cargar ☹️😬");
+            alert ("Error al cargar el contexto!");
         }
     }
 }
