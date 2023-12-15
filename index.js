@@ -51,6 +51,32 @@ function Letra(x, y, ancho, alto, letra){
     this.dibujaLetra = dibujaLetraLetra;
 }
 
+function dibujaTecla(){
+    ctx.fillStyle = colorTecla;
+    ctx.strokeStyle = colorMargen;
+    ctx.fillRect(this.x, this.y, this.ancho, this.alto);
+    ctx.strokeRect(this.x, this.y, this.ancho, this.alto);
+    
+    ctx.fillStyle = "white";
+    ctx.font = "bold 20px courier";
+    ctx.fillText(this.letra, this.x+this.ancho/2-5, this.y+this.alto/2+5);
+}
+
+function dibujaLetraLetra(){
+    var w = this.ancho;
+    var h = this.alto;
+    ctx.fillStyle = "black";
+    ctx.font = "bold 40px Courier";
+    ctx.fillText(this.letra, this.x+w/2-12, this.y+h/2+14);
+}
+
+function dibujaCajaLetra(){
+    ctx.fillStyle = "white";
+    ctx.strokeStyle = "black";
+    ctx.fillRect(this.x, this.y, this.ancho, this.alto);
+    ctx.strokeRect(this.x, this.y, this.ancho, this.alto);
+}
+
 window.onload = function() {
     canvas = document.getElementById("screen");
     if (canvas && canvas.getContext){
